@@ -138,13 +138,20 @@
 	</dependencyManagement>
  -->
 
-<!-- 	<build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
-            <plugin>
+            <!-- <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>2.0.0</version>
@@ -153,8 +160,8 @@
 			       <deploy.stopPreviousVersion>true</deploy.stopPreviousVersion>
 			       <cloudSdkPath>/Users/neeraj/Downloads/google-cloud-sdk</cloudSdkPath>
 			     </configuration>
-            </plugin>
+            </plugin> -->
 		</plugins>
-	</build> -->
+	</build>
 
 </project>
