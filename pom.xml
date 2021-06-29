@@ -15,8 +15,8 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
-		<!-- <spring-cloud.version>Greenwich.SR2</spring-cloud.version> -->
-		<!-- <google-api-client.version>1.30.2</google-api-client.version> -->
+		<spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+		<google-api-client.version>1.30.2</google-api-client.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -50,7 +50,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>	
-<!-- 		
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
 		<dependency>
 	      <groupId>org.springframework.cloud</groupId>
 	      <artifactId>spring-cloud-gcp-starter</artifactId>
@@ -59,19 +65,13 @@
 	    <dependency>
 	      <groupId>org.springframework.cloud</groupId>
 	      <artifactId>spring-cloud-gcp-starter-sql-mysql</artifactId>
-	    </dependency> -->
-
-		<!-- <dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency> -->
+	    </dependency>
 		
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -101,7 +101,7 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		
-	<!-- 	<dependency>
+		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client</artifactId>
 			<version>${google-api-client.version}</version>
@@ -120,12 +120,12 @@
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
-		</dependency> -->
+		</dependency>
 		
 		
 	</dependencies>
 	
-<!-- 	<dependencyManagement>
+	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -136,7 +136,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
- -->
 
 	<build>
 		<plugins>
@@ -151,7 +150,7 @@
 					</execution>
 				</executions>
 			</plugin>
-            <!-- <plugin>
+            <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>2.0.0</version>
@@ -160,7 +159,7 @@
 			       <deploy.stopPreviousVersion>true</deploy.stopPreviousVersion>
 			       <cloudSdkPath>/Users/neeraj/Downloads/google-cloud-sdk</cloudSdkPath>
 			     </configuration>
-            </plugin> -->
+            </plugin>
 		</plugins>
 	</build>
 
