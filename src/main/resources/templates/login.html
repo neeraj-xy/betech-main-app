@@ -42,6 +42,7 @@
 					  <div class="mb-3">
 					    <label for="exampleInputPassword1" class="form-label">Password</label>
 					    <input type="password" name="password" class="form-control" id="password" required>
+					    <div id="forgotPassword" class="form-text"><a th:href="@{/forgotPassword}" class="text-secondary">Forgot Password?</a></div>
 					  </div>
 					  
 					  <div th:if="${param.error != null}" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -50,6 +51,14 @@
 					  </div>
 					  <div th:if="${param.logout != null}" class="alert alert-info alert-dismissible fade show" role="alert">
 						You have logged out successfully
+					    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					  </div>
+					  <div th:if="${password != null}" class="alert alert-warning alert-dismissible fade show" role="alert">
+						[[${password}]]
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					  </div>
+					  <div th:if="${message != null}" class="alert alert-info alert-dismissible fade show" role="alert">
+						[[${message}]]
 					    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					  </div>
 					  

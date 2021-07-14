@@ -23,14 +23,15 @@ public class EmailService {
 	}
 	
 	@Async
-	public void sendEmail(SimpleMailMessage email) {
+	public void sendEmail(SimpleMailMessage email) throws UnsupportedEncodingException {
 		MimeMessage mimeMessage = mailSender.createMimeMessage();
 		try {
 			 
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
  
             mimeMessageHelper.setSubject(email.getSubject());
-            mimeMessageHelper.setFrom(email.getFrom());
+            mimeMessageHelper.setFrom("no-reply@betech.com", "BeTech Support");
+//            mimeMessageHelper.setFrom(email.getFrom());
             mimeMessageHelper.setTo(email.getTo());
             mimeMessageHelper.setText("<html><body>"+email.getText()+"</body></html>", true);
  

@@ -46,6 +46,9 @@ public class User {
 	@Column(name = "gender")
 	private String gender;
 	
+	@Column(name = "dob")
+	private String dob;
+	
 	
 	@Column(name = "authority")
 	private String role;
@@ -54,7 +57,8 @@ public class User {
 	@Transient
 	private String lastseen;
 	
-	
+	@Column(name = "reset_password_token")
+	private String resetPasswordToken;
 	
 	
 	public String getLastseen() {
@@ -139,6 +143,22 @@ public class User {
 	public void setEnabled(boolean value) {
 		this.enabled = value;
 	}
+	
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}	
+	
+	public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
+	}	
 
 	@Override
 	public String toString() {
@@ -146,7 +166,5 @@ public class User {
 				+ ", lastName=" + lastName + ", enabled=" + enabled + ", confirmationToken=" + confirmationToken
 				+ ", gender=" + gender + ", role=" + role + ", lastseen=" + lastseen + "]";
 	}
-
-	
 
 }

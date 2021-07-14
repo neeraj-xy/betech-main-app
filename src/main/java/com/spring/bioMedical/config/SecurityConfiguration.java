@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -23,7 +24,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private CustomAuthenticationSuccessHandler successHandler;
-	
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -39,23 +39,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public PasswordEncoder passwordEncoder(){
-	    return new PasswordEnconderTest();
+	    return new BCryptPasswordEncoder();
 	}
-
-
-
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/admin/**").hasAnyRole("ADMIN", "USER")
+			.antMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/user/**").hasRole("USER")
 			.antMatchers("/doctor/**").hasRole("DOCTOR")
 			.antMatchers("/register").permitAll()
 			.antMatchers("/confirm").permitAll()
 			.antMatchers("/login/**").permitAll()
+			.antMatchers("/forgotPassword/**").permitAll()
+			.antMatchers("/resetPassword/**").permitAll()
 			.antMatchers("/css/**").permitAll()
 			.antMatchers("/js/**").permitAll()
 			.antMatchers("/static/**").permitAll()

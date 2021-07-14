@@ -4,6 +4,14 @@ $('#regtime').val(new Date());
  	duration: 800,
  	easing: 'slide'
  });
+ 
+function checkPasswordMatch(fieldConfirmPassword) {
+    if (fieldConfirmPassword.value != $("#password").val()) {
+        fieldConfirmPassword.setCustomValidity("Passwords do not match!");
+    } else {
+        fieldConfirmPassword.setCustomValidity("");
+    }
+}
 
 (function($) {
 
@@ -295,15 +303,20 @@ $('#regtime').val(new Date());
     fixedContentPos: false
   });
 
+/*  var dateToday = new Date();
 
   $('#appointment_date').datepicker({
 	  'format': 'm/d/yyyy',
-	  'autoclose': true
+	  'autoclose': true,
+	  'minDate': dateToday
 	});
 
 	$('#appointment_time').timepicker();
 
+*/
 
+var today = new Date().toISOString().split('T')[0];
+document.getElementById("appointment_date").setAttribute('min', today);
 
 
 })(jQuery);

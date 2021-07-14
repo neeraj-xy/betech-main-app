@@ -19,6 +19,7 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String showHome(HttpServletRequest request, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		System.out.println("this is inside the login get controller ************" + auth);
 		if (auth instanceof AnonymousAuthenticationToken || auth == null) {
 			return "login";
 		}
@@ -45,6 +46,9 @@ public class LoginController {
 	@RequestMapping(value = "/access-denied", method = RequestMethod.GET)
 	public String showAccessDenied(HttpServletRequest request, HttpServletResponse response) throws IOException {
 //		response.sendRedirect(request.getContextPath() + "?accessDenied");
-		return "redirect:/login";
+		if (request.isUserInRole("ROLE_DOCTOR")) {
+			return "redirect:/doctor/index";
+		}
+		return "redirect:/user/index";
 	}
 }

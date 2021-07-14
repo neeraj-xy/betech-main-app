@@ -46,6 +46,8 @@ public class Admin {
 	@Column(name = "gender")
 	private String gender;
 	
+	@Column(name = "dob")
+	private String dob;
 	
 	@Column(name = "authority")
 	private String role;
@@ -138,6 +140,14 @@ public class Admin {
 	public void setEnabled(boolean value) {
 		this.enabled = value;
 	}
+	
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}	
 
 	@Override
 	public String toString() {

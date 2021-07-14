@@ -154,8 +154,10 @@
                       <th>Last Name</th>
                       <th>Email</th>
                          <th>Gender</th>
+                         <th>DOB</th>
                        <th>Role</th>
                      <th>Last-seen</th>
+                     <th>Actions</th>
                     
                       
                     </tr>
@@ -167,8 +169,10 @@
                       <th>Last Name</th>
                       <th>Email</th>
                          <th>Gender</th>
+                         <th>DOB</th>
                      <th>Role</th>
                       <th>Last-seen</th>
+                      <th>Actions</th>
                     
                     </tr>
                   <tbody>
@@ -178,9 +182,13 @@
 				<td   th:text="${temp.firstName}" />	
 				 <td th:text="${temp.lastName}"/>
 				<td   th:text="${temp.email}" />	
-					<td  th:text="${temp.gender}" />	
+					<td  th:text="${temp.gender}" />
+					<td  th:text="${temp.dob}" />	
 				<td th:text="${temp.role}" />	
-				<td th:text="${temp.lastseen}" />	
+				<td th:text="${temp.lastseen}" />
+				<td>
+					<a th:href="@{/admin/delete-user/{id}(id=${temp.id})}" class="btn btn-danger text-white"><i class="fa fa-trash"></i></a>
+				</td>
 				
 		</tr>
        

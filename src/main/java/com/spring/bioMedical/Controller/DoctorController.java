@@ -9,10 +9,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.bioMedical.entity.Admin;
 import com.spring.bioMedical.entity.Appointment;
+import com.spring.bioMedical.entity.User;
 import com.spring.bioMedical.service.AdminServiceImplementation;
 import com.spring.bioMedical.service.AppointmentServiceImplementation;
 import com.spring.bioMedical.service.UserService;
@@ -71,12 +74,7 @@ public class DoctorController {
 		         
 		List<Appointment> list=appointmentServiceImplementation.findAll();
 		
-		model.addAttribute("name",admin.getFirstName());
-		
-		model.addAttribute("email",admin.getEmail());
-		
-		
-		model.addAttribute("user",admin.getFirstName()+" "+admin.getLastName());
+		model.addAttribute("user", admin);
 		
 		// add to the spring model
 		model.addAttribute("app", list);
@@ -84,5 +82,23 @@ public class DoctorController {
 		return "doctor/index";
 	}
 	
+	@PostMapping("/save-profile")
+	public String saveProfile(@ModelAttribute("user") User user) {
+		
+		User u = userService.findByEmail(user.getEmail());
+		
+		u.setFirstName(user.getFirstName());
+		u.setLastName(user.getLastName());
+		
+		userService.saveUser(u);
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+	    Date now = new Date();  
+	    
+	    String log=now.toString();
+	
+		// use a redirect to prevent duplicate submissions
+		return "redirect:/doctor/index";
+	}
 	
 }

@@ -43,6 +43,7 @@
           <li class="nav-item"><a th:href="@{/user/doctor}"  class="nav-link">Doctors</a></li>
           <li class="nav-item"><a th:href="@{/user/blog}"  class="nav-link">Blog</a></li>
           <li class="nav-item active"><a th:href="@{/user/contact}"  class="nav-link">Contact</a></li>
+          <li class="nav-item"><a th:href="@{/user/profile}"  class="nav-link">My Profile</a></li>
           <li class="nav-item"><a href="#"  class="nav-link" data-toggle="modal" data-target="#modalAppointment"><span>Make an Appointment</span></a></li>
       	  <li class="nav-item ">
          	<form  th:action="@{/logout}"  method="POST">
@@ -183,7 +184,7 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
   <!-- Modal -->
-    <div class="modal fade" id="modalAppointment" tabindex="-1" role="dialog" aria-labelledby="modalAppointmentLabel" aria-hidden="true">
+     <div class="modal fade" id="modalAppointment" tabindex="-1" role="dialog" aria-labelledby="modalAppointmentLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -193,20 +194,22 @@
             </button>
           </div>
           <div class="modal-body">
+           
+           
             <form th:action="@{/user/save-app}"
 						 th:object="${app}" method="POST">
 						 
               <div class="form-group">
                 <label for="appointment_name" class="text-black">Full Name</label>
               
-                <input type="text" th:field="*{name}" class="form-control" id="appointment_name" required>
+                <input type="text" th:field="*{name}" class="form-control" id="appointment_name" required readonly>
               </div>
               
               
               <div class="form-group">
                 <label for="appointment_email" class="text-black">Email</label>
               
-                <input type="text" th:field="*{email}" class="form-control" id="appointment_email" required>
+                <input type="text" th:field="*{email}" class="form-control" id="appointment_email" required readonly>
               </div>
               
               <div class="row">
@@ -214,17 +217,17 @@
                   <div class="form-group">
                     <label for="appointment_date" class="text-black">Date</label>
               
-                    <input type="text" th:field="*{date}" class="form-control" id="appointment_date" required>
+                    <input type="date" th:field="*{date}" class="form-control" id="appointment_date" required>
                   </div>    
                 </div>
-              
-              <input type="hidden" id="regtime" th:field="*{regtime}" class="form-control" required>
+              	
+              	<input type="hidden" id="regtime" th:field="*{regtime}" class="form-control" required>
               
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="appointment_time" class="text-black">Time</label>
               
-                    <input type="text" th:field="*{time}" class="form-control" id="appointment_time" required>
+                    <input type="time" th:field="*{time}" class="form-control" id="appointment_time" required>
                   </div>
                 </div>
               </div>

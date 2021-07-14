@@ -7,10 +7,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +27,8 @@ import com.spring.bioMedical.service.UserService;
 @RequestMapping("/admin")
 public class AdminController {
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	private UserService userService;
 
@@ -211,7 +215,7 @@ public class AdminController {
 		
 		admin.setRole("ROLE_DOCTOR");
 		
-		admin.setPassword("default");
+		admin.setPassword(passwordEncoder.encode("doc@123"));
 		
 		admin.setEnabled(true);
 		
@@ -275,7 +279,7 @@ public class AdminController {
 		
 		admin.setRole("ROLE_ADMIN");
 		
-		admin.setPassword("default");
+		admin.setPassword(passwordEncoder.encode("betech@123"));
 		
 		admin.setEnabled(true);
 		
@@ -377,5 +381,17 @@ public class AdminController {
 		
 		
 		return "admin/appointment";
+	}
+	
+	@GetMapping("/delete-user/{id}")
+	public String deleteUser(@PathVariable (value = "id") int id) {
+		userService.deleteUser(id);
+		return "redirect:/admin/user-details";
+	}
+	
+	@GetMapping("/delete-doc/{id}")
+	public String deleteDoctor(@PathVariable (value = "id") int id) {
+		userService.deleteUser(id);
+		return "redirect:/admin/doctor-details";
 	}
 }

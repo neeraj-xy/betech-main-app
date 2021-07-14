@@ -8,6 +8,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +27,10 @@ import com.spring.bioMedical.service.UserService;
 @Controller
 public class RegisterController {
 	
-	//private BCryptPasswordEncoder bCryptPasswordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	private UserService userService;
 	private EmailService emailService;
 	
@@ -60,6 +65,22 @@ public class RegisterController {
 			modelAndView.setViewName("register");
 			bindingResult.reject("email");
 		}
+		
+		if (user.getFirstName().trim().equals("") || user.getLastName().trim().equals("") 
+				|| user.getFirstName().length() < 2 || user.getLastName().length() < 2) {
+			modelAndView.addObject("nameMessage", "Enter proper first and last name!");
+			modelAndView.setViewName("register");
+			bindingResult.reject("name");
+		}
+		
+		String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+	    Boolean valid = user.getEmail().matches(regex);
+	    
+	    if (!valid) {
+	    	modelAndView.addObject("emailMessage", "Enter a valid email address!");
+			modelAndView.setViewName("register");
+			bindingResult.reject("email");
+	    }
 			
 		if (bindingResult.hasErrors()) { 
 			modelAndView.setViewName("register");		
@@ -144,8 +165,9 @@ public class RegisterController {
 		User user = userService.findByConfirmationToken(requestParams.get("token"));
 
 		// Set new password
-	//	user.setPassword(bCryptPasswordEncoder.encode(requestParams.get("password")));
-		user.setPassword(requestParams.get("password"));
+//		user.setPassword(bCryptPasswordEncoder.encode(requestParams.get("password")));
+		user.setPassword(passwordEncoder.encode(requestParams.get("password")));
+//		user.setPassword(requestParams.get("password"));
 
 		// Set user to enabled
 		user.setEnabled(true);

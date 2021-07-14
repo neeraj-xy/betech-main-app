@@ -153,6 +153,7 @@
                       <th>Last Name</th>
                       <th>Email</th>
                          <th>Gender</th>
+                         <th>DOB</th>
                        <th>Role</th>
                     <th>Last-seen</th>
                     
@@ -166,6 +167,7 @@
                       <th>Last Name</th>
                       <th>Email</th>
                          <th>Gender</th>
+                         <th>DOB</th>
                      <th>Role</th>
                      <th>Last-seen</th>
                     
@@ -178,7 +180,8 @@
 				<td   th:text="${temp.firstName}" />	
 				 <td th:text="${temp.lastName}"/>
 				<td   th:text="${temp.email}" />	
-					<td  th:text="${temp.gender}" />	
+					<td  th:text="${temp.gender}" />
+					<td  th:text="${temp.dob}" />	
 				<td th:text="${temp.role}" />
 				<td th:text="${temp.lastseen}" />		
 				
