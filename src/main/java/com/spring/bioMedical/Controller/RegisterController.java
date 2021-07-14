@@ -1,5 +1,6 @@
 package com.spring.bioMedical.Controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -53,7 +54,7 @@ public class RegisterController {
 	
 	// Process form input data
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult, HttpServletRequest request) throws UnsupportedEncodingException {
 				
 		// Lookup user in database by e-mail
 		User userExists = userService.findByEmail(user.getEmail());
