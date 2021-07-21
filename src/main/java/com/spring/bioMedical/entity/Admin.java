@@ -41,7 +41,7 @@ public class Admin {
 	@NotEmpty(message = "Please provide your first name")
 	private String firstName;
 	
-	@Column(name = "middle_name")
+	@Column(name = "middle_name", nullable = true, columnDefinition = "varchar(255) default ''")
 	@NotEmpty(message = "Please provide your middle name")
 	private String middleName;
 
