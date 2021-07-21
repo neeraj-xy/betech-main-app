@@ -73,6 +73,10 @@ public class RegisterController {
 			bindingResult.reject("email");
 		}
 		
+		if (user.getMiddleName().trim().equals("") || user.getMiddleName() == null) {
+			user.setMiddleName("no middle name");
+		}
+		
 		if (user.getFirstName().trim().equals("") || user.getLastName().trim().equals("") 
 				|| user.getFirstName().length() < 2 || user.getLastName().length() < 2 
 				|| user.getPrefName().trim().equals("") || user.getPrefName().length() < 2 ) {
