@@ -1,9 +1,21 @@
 package com.spring.bioMedical.Controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -35,6 +47,10 @@ public class RegisterController {
 	private UserService userService;
 	private EmailService emailService;
 	
+	public static final String ACCOUNT_SID = "ACdd951a4808a0b0438515ef2e71fe9d00";
+	public static final String AUTH_TOKEN = "29eaa0d0691f739484f6abc1c18acf2b";
+
+	
 	@Autowired
 	public RegisterController(
 			UserService userService, EmailService emailService) {
@@ -46,7 +62,8 @@ public class RegisterController {
 	// Return registration form template
 	@RequestMapping(value="/register", method = RequestMethod.GET)
 
-	public ModelAndView showRegistrationPage(ModelAndView modelAndView, User user){
+	public ModelAndView showRegistrationPage(ModelAndView modelAndView, User user) {
+		
 		modelAndView.addObject("user", user);
 		modelAndView.setViewName("register");
 		return modelAndView;
@@ -54,8 +71,8 @@ public class RegisterController {
 	
 	// Process form input data
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult, HttpServletRequest request) throws UnsupportedEncodingException {
-				
+	public ModelAndView processRegistrationForm(ModelAndView modelAndView, @Valid User user, BindingResult bindingResult, HttpServletRequest request) throws IOException, InterruptedException {
+		
 		// Lookup user in database by e-mail
 		User userExists = userService.findByEmail(user.getEmail());
 		
@@ -68,8 +85,9 @@ public class RegisterController {
 		}
 		
 		if (user.getFirstName().trim().equals("") || user.getLastName().trim().equals("") 
-				|| user.getFirstName().length() < 2 || user.getLastName().length() < 2) {
-			modelAndView.addObject("nameMessage", "Enter proper first and last name!");
+				|| user.getFirstName().length() < 2 || user.getLastName().length() < 2 
+				|| user.getPrefName().trim().equals("") || user.getPrefName().length() < 2 ) {
+			modelAndView.addObject("nameMessage", "Enter proper first, last and preferred name!");
 			modelAndView.setViewName("register");
 			bindingResult.reject("name");
 		}
@@ -82,6 +100,18 @@ public class RegisterController {
 			modelAndView.setViewName("register");
 			bindingResult.reject("email");
 	    }
+	    
+	    Pattern pattern = Pattern.compile("^\\d{12}$");
+	    Matcher matcher = pattern.matcher(user.getMobile());
+	      
+	    boolean res = matcher.matches();
+	    
+	    if (!res) {
+	    	modelAndView.addObject("mobileMessage", "Enter a valid mobile number!");
+			modelAndView.setViewName("register");
+			bindingResult.reject("mobile");
+	    }
+	    
 			
 		if (bindingResult.hasErrors()) { 
 			modelAndView.setViewName("register");		
@@ -99,7 +129,18 @@ public class RegisterController {
 		    userService.saveUser(user);
 				
 			String appUrlServer = request.getScheme() + "://" + request.getServerName();
-		    
+//			
+//			HttpRequest smsReq = HttpRequest.newBuilder()
+//					.uri(URI.create("https://d7sms.p.rapidapi.com/secure/send"))
+//					.header("content-type", "application/json")
+//					.header("authorization", "Basic dnR5YjgwOTI6RnNwcFFueTI=")
+//					.header("x-rapidapi-key", "5dbf5e3c4dmshfff746f95ba3bfdp1df0d1jsn48a7bc21bb3f")
+//					.header("x-rapidapi-host", "d7sms.p.rapidapi.com")
+//					.method("POST", HttpRequest.BodyPublishers.ofString("{ \"coding\": \"8\", \"from\": \"BeTech\", \"hex-content\": \"00480065006c006c006f\", \"to\": 447398491741 }")).build();
+//			
+//			HttpResponse<String> response = HttpClient.newHttpClient().send(smsReq, HttpResponse.BodyHandlers.ofString());
+//			System.out.println(response.body() + " <------ sms response");
+//		    
 		    
 			SimpleMailMessage registrationEmail = new SimpleMailMessage();
 			registrationEmail.setTo(user.getEmail());

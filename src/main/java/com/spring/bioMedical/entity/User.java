@@ -29,13 +29,29 @@ public class User {
 	@Transient
 	private String password;
 	
+	@Column(name = "mobile")
+	@NotEmpty(message = "Please enter your mobile number")
+	private String mobile;
+
+	@Column(name = "prefix")
+	@NotEmpty(message = "Please select prefix")
+	private String prefix;
+	
 	@Column(name = "first_name")
 	@NotEmpty(message = "Please provide your first name")
 	private String firstName;
 	
+	@Column(name = "middle_name")
+	@NotEmpty(message = "Please provide your middle name")
+	private String middleName;
+	
 	@Column(name = "last_name")
 	@NotEmpty(message = "Please provide your last name")
 	private String lastName;
+	
+	@Column(name = "preferred_name")
+	@NotEmpty(message = "Please provide your preferred name")
+	private String prefName;
 	
 	@Column(name = "enabled")
 	private boolean enabled;
@@ -49,7 +65,6 @@ public class User {
 	@Column(name = "dob")
 	private String dob;
 	
-	
 	@Column(name = "authority")
 	private String role;
 	
@@ -60,7 +75,22 @@ public class User {
 	@Column(name = "reset_password_token")
 	private String resetPasswordToken;
 	
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 	
+	public String getPrefName() {
+		return prefName;
+	}
+
+	public void setPrefName(String prefName) {
+		this.prefName = prefName;
+	}
+
 	public String getLastseen() {
 		return lastseen;
 	}
@@ -72,6 +102,22 @@ public class User {
 	
 	public String getRole() {
 		return role;
+	}
+
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
 
 	public void setRole(String role) {

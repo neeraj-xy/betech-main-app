@@ -35,17 +35,49 @@
 				  <div class="card-header text-center"><h3>User Registration</h3></div>
 				  <div class="card-body">
 				  	<form th:action="@{/register}" th:object="${user}" method="post" data-toggle="validator">
+				  	  <div class="mb-3">
+					    <label for="prefix" class="form-label">Prefix</label>
+					    <select th:field="*{prefix}" class="form-select form-select-sm" name="prefix" id="prefix">
+		    			    <option value="Mr"> Mr </option> 
+						    <option value="Master"> Master </option> 
+						    <option value="Ms"> Ms </option> 
+						    <option value="Miss"> Miss </option> 
+						    <option value="Mrs"> Mrs </option> 
+						    <option value="Fr"> Father (Fr) </option>
+						    <option value="Rev"> Reverend (Rev) </option>
+						    <option value="Dr"> Doctor (Dr) </option> 
+						    <option value="Atty"> Attorney (Atty) </option>  
+						    <option value="Hon"> Honorable (Hon) </option>  
+						    <option value="Prof"> Professor (Prof) </option>  
+						    <option value="Pres"> President (Pres) </option> 
+						    <option value="VP"> Vice President (VP) </option> 
+						    <option value="Gov"> Governor (Gov) </option>  
+						    <option value="Ofc"> Officer (Ofc) </option> 
+						</select> 
+					  </div>
 			          <div class="mb-3">
 					    <label for="fname" class="form-label">First Name</label>
-					    <input type="text" th:field="*{firstName}" name="fname" class="form-control" id="fname" required>
+					    <input type="text" placeholder="Enter your first name" th:field="*{firstName}" name="fname" class="form-control" id="fname" required>
+					  </div>
+					  <div class="mb-3">
+					    <label for="fmname" class="form-label">Middle Name</label>
+					    <input type="text" placeholder="Enter your middle name" th:field="*{middleName}" name="fname" class="form-control" id="mname">
 					  </div>
 					  <div class="mb-3">
 					    <label for="lname" class="form-label">Last Name</label>
-					    <input type="text" th:field="*{lastName}" name="lname" class="form-control" id="lname" required>
+					    <input type="text" placeholder="Enter your last name" th:field="*{lastName}" name="lname" class="form-control" id="lname" required>
+					  </div>
+					  <div class="mb-3">
+					    <label for="prefname" class="form-label">Preferred Name</label>
+					    <input type="text" placeholder="Enter any preferred name" th:field="*{prefName}" name="prefName" class="form-control" id="prefName" required>
+					  </div>
+					  <div class="mb-3">
+					    <label for="prefname" class="form-label">Mobile Number</label>
+					    <input placeholder="Enter mobile number with country code and without '+' symbol" type="text" th:field="*{mobile}" name="mobile" class="form-control" id="mobile" required>
 					  </div>
 					  <div class="mb-3">
 					    <label for="exampleInputEmail1" class="form-label">Email address</label>
-					    <input type="email" th:field="*{email}" name="username" class="form-control" id="username" required>
+					    <input type="email" placeholder="Enter your email address" th:field="*{email}" name="username" class="form-control" id="username" required>
 					    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
 					  </div>
 					  <div class="mb-3">
@@ -82,6 +114,11 @@
 				  	  
 				  	  <div th:if="${emailMessage}" class="alert alert-warning alert-dismissible fade show" role="alert">
 				  	  	[[${emailMessage}]]
+				  	  	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				  	  </div>
+				  	  
+				  	  <div th:if="${mobileMessage}" class="alert alert-warning alert-dismissible fade show" role="alert">
+				  	  	[[${mobileMessage}]]
 				  	  	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				  	  </div>
 				  	  
