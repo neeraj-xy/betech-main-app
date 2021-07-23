@@ -60,13 +60,42 @@
 		<div class="row">
 			<div class="col-8 offset-2">
 				<form th:action="@{/user/save-profile}" th:object="${user}" method="POST">
+					<div class="mb-3">
+					    <label for="prefix" class="form-label">Prefix</label>
+					    <br>
+					    <select th:field="*{prefix}" class="form-select form-select-sm" name="prefix" id="prefix">
+		    			    <option value="Mr"> Mr </option> 
+						    <option value="Master"> Master </option> 
+						    <option value="Ms"> Ms </option> 
+						    <option value="Miss"> Miss </option> 
+						    <option value="Mrs"> Mrs </option> 
+						    <option value="Fr"> Father (Fr) </option>
+						    <option value="Rev"> Reverend (Rev) </option>
+						    <option value="Dr"> Doctor (Dr) </option> 
+						    <option value="Atty"> Attorney (Atty) </option>  
+						    <option value="Hon"> Honorable (Hon) </option>  
+						    <option value="Prof"> Professor (Prof) </option>  
+						    <option value="Pres"> President (Pres) </option> 
+						    <option value="VP"> Vice President (VP) </option> 
+						    <option value="Gov"> Governor (Gov) </option>  
+						    <option value="Ofc"> Officer (Ofc) </option> 
+						</select> 
+				  </div>
 				  <div class="mb-3">
 				    <label for="fname" class="form-label">First Name</label>
 				    <input type="text" th:field="*{firstName}" class="form-control" id="fname" name="fname" required>
 				  </div>
 				  <div class="mb-3">
+				    <label for="mname" class="form-label">Middle Name</label>
+				    <input type="text" th:field="*{middleName}" class="form-control" id="mname" name="mname">
+				  </div>
+				  <div class="mb-3">
 				    <label for="lname" class="form-label">Last Name</label>
 				    <input type="text" th:field="*{lastName}" class="form-control" id="lname" name="lname" required>
+				  </div>
+				  <div class="mb-3">
+				    <label for="pname" class="form-label">Preferred Name</label>
+				    <input type="text" th:field="*{prefName}" class="form-control" id="pname" name="pname" required>
 				  </div>
 				  <div class="mb-3">
 				    <label for="email" class="form-label">Email address</label>

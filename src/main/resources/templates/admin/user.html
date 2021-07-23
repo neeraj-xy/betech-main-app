@@ -149,9 +149,11 @@
                   <thead>
                     <tr>
                      	<th>Id</th>
-                     
+                     <th>Prefix</th>
                       <th>First Name</th>
+                      <th>Middle Name</th>
                       <th>Last Name</th>
+                      <th>Preferred Name</th>
                       <th>Email</th>
                          <th>Gender</th>
                          <th>DOB</th>
@@ -165,8 +167,11 @@
                   <tfoot>
                     <tr> 		
                     	<th>Id</th>
+                    	<th>Prefix</th>
                       <th>First Name</th>
+                      <th>Middle Name</th>
                       <th>Last Name</th>
+                      <th>Preferred Name</th>
                       <th>Email</th>
                          <th>Gender</th>
                          <th>DOB</th>
@@ -179,8 +184,11 @@
        	<tr th:each="temp : ${user}">
        	
   		<td  th:text="${temp.id}" />	
-				<td   th:text="${temp.firstName}" />	
+  		<td   th:text="${temp.prefix}" />	
+				<td   th:text="${temp.firstName}" />
+				<td   th:text="${temp.middleName}" />	
 				 <td th:text="${temp.lastName}"/>
+				 <td th:text="${temp.prefName}"/>
 				<td   th:text="${temp.email}" />	
 					<td  th:text="${temp.gender}" />
 					<td  th:text="${temp.dob}" />	

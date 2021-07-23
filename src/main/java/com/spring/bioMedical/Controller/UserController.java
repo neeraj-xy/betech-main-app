@@ -102,6 +102,9 @@ public class UserController {
 		
 		u.setFirstName(user.getFirstName());
 		u.setLastName(user.getLastName());
+		u.setMiddleName(user.getMiddleName());
+		u.setPrefName(user.getPrefName());
+		u.setPrefix(user.getPrefix());
 		
 		userService.saveUser(u);
 		
@@ -405,6 +408,9 @@ public class UserController {
 		 
 		 user.setFirstName(admin.getFirstName());
 		 user.setLastName(admin.getLastName());
+		 user.setMiddleName(admin.getMiddleName());
+		 user.setPrefName(admin.getPrefName());
+		 user.setPrefix(admin.getPrefix());
 		 user.setDob(admin.getDob());
 		 user.setEmail(admin.getEmail());
 		         

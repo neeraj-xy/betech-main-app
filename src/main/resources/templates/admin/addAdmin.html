@@ -147,7 +147,27 @@
 						 th:object="${doctor}" method="POST">
 	<table>
 	<tr>
-	
+	<td><br><dt class="col-sm-3">Prefix:</dt></td>
+	<td>
+	<br>
+	    <select th:field="*{prefix}" class="form-select" name="prefix" id="prefix">
+		    <option value="Mr"> Mr </option> 
+		    <option value="Master"> Master </option> 
+		    <option value="Ms"> Ms </option> 
+		    <option value="Miss"> Miss </option> 
+		    <option value="Mrs"> Mrs </option> 
+		    <option value="Fr"> Father (Fr) </option>
+		    <option value="Rev"> Reverend (Rev) </option>
+		    <option value="Dr"> Doctor (Dr) </option> 
+		    <option value="Atty"> Attorney (Atty) </option>  
+		    <option value="Hon"> Honorable (Hon) </option>  
+		    <option value="Prof"> Professor (Prof) </option>  
+		    <option value="Pres"> President (Pres) </option> 
+		    <option value="VP"> Vice President (VP) </option> 
+		    <option value="Gov"> Governor (Gov) </option>  
+		    <option value="Ofc"> Officer (Ofc) </option> 
+		</select> 
+    </td>
 	</tr>
 	
 	
@@ -156,11 +176,21 @@
 	<td><br><input type="text" th:field="*{firstName}"  class="form-control" required="" placeholder="First Name"></td>
 	</tr>
 	
+	<tr>
+	<td><br><dt class="col-sm-3">Middle Name:</dt></td>
+	<td><br><input type="text" th:field="*{middleName}"  class="form-control" placeholder="Middle Name"></td>
+	</tr>
 	
 	<tr>
 	
 	<td><br><br><dt class="col-sm-3">Last Name:</dt></td>
 	<td><br><input type="text" th:field="*{lastName}" required="" class="form-control" placeholder="Last Name"></td>
+	</tr>
+	
+	<tr>
+	
+	<td><br><br><dt class="col-sm-3">Preferred Name:</dt></td>
+	<td><br><input type="text" th:field="*{prefName}" required="" class="form-control" placeholder="Preferred Name"></td>
 	</tr>
 	
 	<tr>
@@ -195,7 +225,7 @@
 	
 	
 	<tr>
-	<td colspan="2" align="center"><br><input class="btn btn-primary btn-lg" type="submit" value="Send"></td>
+	<td colspan="2" align="center"><br><input class="btn btn-success" type="submit" value="Save"></td>
 	
 	</tr>
 	
